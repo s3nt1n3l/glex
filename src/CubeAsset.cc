@@ -14,7 +14,7 @@ CubeAsset::CubeAsset() {
       , 0.5, 0.5, 0.5
   };
 
-  element_buffer_length = 6;
+  element_buffer_length = 36;
   GLuint element_buffer []  {
     0, 1, 3
     , 2, 3, 0,  //back
