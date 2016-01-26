@@ -29,5 +29,6 @@ class GameWorld {
   void Draw();
  private:
   std::shared_ptr<GameAssetManager> asset_manager;
+  
 };
 #endif // GAMEWORLD_H
