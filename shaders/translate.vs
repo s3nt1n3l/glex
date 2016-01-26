@@ -1,6 +1,7 @@
 #version 130
 
 in vec3 position;
+in vec3 color;
 
 out vec3 frag_color;
 
@@ -43,5 +44,5 @@ void main() {
                       * translate(0.0, 0.0, -5.0)
 		      * rotate_x(radians(45.0))
                       * vec4(position, 1.0f);
-      frag_color = vec3(1.0, 1.0, 1.0); // white
+      			frag_color = color;
 }

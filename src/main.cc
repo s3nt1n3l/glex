@@ -150,6 +150,15 @@ int main(int argc, char ** argv) {
   // Call the function "tick" every delay milliseconds
   SDL_AddTimer(delay, tick, NULL);
 
+	int X; 		//setting up for mouse controls
+    	int Y;
+	
+	int oldX;	//more setup
+    	int oldY;
+	
+	//SDL_SetRelativeMouseMode(SDL_TRUE);      
+	SDL_GetRelativeMouseState(&X, &Y);	//getting current mouse co-ordinates
+	
   // Add the main event loop
   SDL_Event event;
   while (SDL_WaitEvent(&event)) {
@@ -160,9 +169,43 @@ int main(int argc, char ** argv) {
     case SDL_USEREVENT:
       Draw(window, game_world);
 
+    case  SDL_MOUSEMOTION:
+      oldX = X;  //taking old mouse x co-ords
+      X = event.motion.x; //seeing the different
+        
+      if (X > oldX) {		//Difference positive = right
+              game_world -> Cam_Control('>');
+      }
+      else if (X < oldX) {	// Difference negative = left
+              game_world -> Cam_Control('<');
+      }
+        oldY = Y; // taking old mouse y co-ords
+        Y = event.motion.y;
+      if (Y < oldY) {		// Difference positive = up
+               game_world -> Cam_Control('^');
+      }
+      else if (Y > oldY) {	// Difference negative = down
+              game_world -> Cam_Control('v');
+      }
+	    break;
+	
+	  case SDL_KEYDOWN:			//At keyboard input
+      switch (event.key.keysym.sym) {
+      case SDLK_w:			//When pressing w
+        game_world -> Cam_Control('w');
+      break;
+      case SDLK_a:			//When pressing a
+        game_world -> Cam_Control('a');
+      break;
+      case SDLK_s:			//When pressing s
+        game_world -> Cam_Control('s');
+      break;
+      case SDLK_d:			//When pressing d
+        game_world -> Cam_Control('d');
       break;
     default:
       break;
     }
   }
+}
 }

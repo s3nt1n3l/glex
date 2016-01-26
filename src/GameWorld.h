@@ -5,6 +5,9 @@
 
 #include <GL/gl.h>
 
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
 #include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
@@ -16,6 +19,7 @@
  */
 class GameWorld {
  public:
+
   /**
    * We thread the ApplicationMode through the GameWorld ss we want to read it
    * in from the user.  Threading the state through the various function calls
@@ -27,8 +31,9 @@ class GameWorld {
    * Calling Draw() will draw the entire world.
    */
   void Draw();
+  void Cam_Control(char key);
+
  private:
   std::shared_ptr<GameAssetManager> asset_manager;
-  
 };
 #endif // GAMEWORLD_H
