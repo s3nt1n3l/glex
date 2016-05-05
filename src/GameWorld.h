@@ -31,7 +31,6 @@ class GameWorld {
    * Calling Draw() will draw the entire world.
    */
   void Draw();
-  void Cam_Control(char key);
 
  private:
   std::shared_ptr<GameAssetManager> asset_manager;
