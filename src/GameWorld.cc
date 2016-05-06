@@ -32,6 +32,6 @@ GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<Gam
  }
  
  
-/* void GameWorld::UpdateCameraPosition(Input input_Direction, float MouseX, float MouseY) {
+ void GameWorld::UpdateCameraPosition(Input input_Direction, float MouseX, float MouseY) {
    asset_manager->UpdateCameraPosition(input_Direction, MouseX, MouseY);
-   }*/
+   }
