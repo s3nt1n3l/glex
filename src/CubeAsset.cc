@@ -1,6 +1,6 @@
 #include "CubeAsset.h"
 
-CubeAsset::CubeAsset(GLfloat x, GLfloat y, GLfloat z) : model_matrix(glm::mat4(1.0)) {
+CubeAsset::CubeAsset(GLfloat x, GLfloat y, GLfloat z): model_matrix(glm::mat4(1.0)){
   // model coordinates, origin at centre.
   GLfloat vertex_buffer [] {
   	x-0.5, 	 y-0.5,   z-0.5
@@ -151,3 +151,4 @@ void CubeAsset::rotateX(float angle) {
     glm::mat4 id(model_matrix);
   model_matrix = glm::rotate(id, 45.0f, unit_x_axis);
   }
+

@@ -21,6 +21,17 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
   };
 
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
+
+  projectionMatrix_link = glGetUniformLocation(program_token, "projectionMatrix");
+  translateMatrix_link = glGetUniformLocation(program_token, "translateMatrix");
+  viewMatrix_link = glGetUniformLocation(program_token, "viewMatrix");
+
+  projectionMatrix = glm::perspective(glm::radians(45.0f), (float) 640/ (float)480, 0.1f, 1000.0f);
+
+}
+
+void GameAssetManager::UpdateCameraPosition(Input input_Direction,int MouseX,int MouseY){
+  viewMatrix = camera.UpdateCameraPosition(input_Direction, MouseX, MouseY);
 }
 
 /**
@@ -31,29 +42,6 @@ GameAssetManager::~GameAssetManager() {
   glDeleteProgram(program_token);
 }
 
-/**
- * Unimplemented copy constructor -- this means that the GameAssetManager
- * may not work as you'd expect when being copied.
- */
-GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
-  // TODO: implement this
-}
-
-/**
- * Unimplemented move constructor -- this unimplemented method violates the
- * C++11 move semantics for GameAssetManager.
- */
-GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
-  // TODO: implement this
-}
-
-/**
- * Unimplemented assisgnment operator -- violates the expected semantics for
- * assignment in C++11.
- */
-void GameAssetManager::operator=(GameAssetManager const& the_manager) {
-  // TODO: implement this
-}
 
 /**
  * Adds a GameAsset to the scene graph.
@@ -67,6 +55,9 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  */
 void GameAssetManager::Draw() {
   for(auto ga: draw_list) {
+    glUniformMatrix4fv(projectionMatrix_link, 1, GL_FALSE, &projectionMatrix[0][0]);
+    glUniformMatrix4fv(viewMatrix_link, 1, GL_FALSE, &viewMatrix[0][0]);
+    glUniformMatrix4fv(translateMatrix_link, 1, GL_FALSE, &translateMatrix[0][0]);
     ga->Draw(program_token);
   }
 }
@@ -125,17 +116,17 @@ GLuint GameAssetManager::CreateGLESShader(GLenum type, std::string & shader) {
     GLint maxLength = 0;
     glGetShaderiv(shader_token, GL_INFO_LOG_LENGTH, &maxLength);
 
-    //The maxLength includes the NULL character
+    ///The maxLength includes the NULL character
     std::vector<char> errorLog(maxLength);
     glGetShaderInfoLog(shader_token, maxLength, &maxLength, &errorLog[0]);
 
-    //Provide the infolog in whatever manor you deem best.
+    ///Provide the infolog in whatever manor you deem best.
     std::cerr << "Failed to compile " << shader << " with error code " << shader_ok << std::endl;
     for(auto c: errorLog) {
       std::cerr << c;
     }
 
-    glDeleteShader(shader_token); //Don't leak the shader.
+    glDeleteShader(shader_token); ///Don't leak the shader.
     exit(-1);
   }
   return shader_token;
@@ -153,14 +144,39 @@ std::pair<GLchar *, GLint> GameAssetManager::ReadShader(std::string & shader) {
   GLint length;
   input_file.open(shader, std::ios::in);
 
-  input_file.seekg(0, std::ios::end);  // go to the end of the file
-  length = input_file.tellg();    // get length of the file
-  input_file.seekg(0, std::ios::beg);  // go to beginning of the file
+  input_file.seekg(0, std::ios::end);  /// go to the end of the file
+  length = input_file.tellg();    /// get length of the file
+  input_file.seekg(0, std::ios::beg);  /// go to beginning of the file
 
   GLchar * buffer = new GLchar[length+1];
   input_file.read(buffer, length);
-  buffer[length+1]='\0';  // Ensure null terminated
+  buffer[length+1]='\0';  /// Ensure null terminated
 
   input_file.close();
   return std::make_pair(buffer, length);
 }
+
+/**
+ * Unimplemented copy constructor -- this means that the GameAssetManager
+ * may not work as you'd expect when being copied.
+ */
+GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
+  // TODO: implement this
+}
+
+/**
+ * Unimplemented move constructor -- this unimplemented method violates the
+ * C++11 move semantics for GameAssetManager.
+ */
+GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
+  // TODO: implement this
+}
+
+/**
+ * Unimplemented assisgnment operator -- violates the expected semantics for
+ * assignment in C++11.
+ */
+void GameAssetManager::operator=(GameAssetManager const& the_manager) {
+  // TODO: implement this
+}
+
