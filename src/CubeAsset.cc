@@ -149,6 +149,5 @@ void CubeAsset::rotateX(float angle) {
     glm::vec3 unit_x_axis(1.0,0.0,0.0);
     glm::vec3 unit_y_axis(0.0,1.0,0.0);
     glm::mat4 id(model_matrix);
-    model_matrix = glm::rotate(id, 45.0f, unit_x_axis);
+    model_matrix = glm::rotate(id, 0.1f, unit_x_axis);
   }
-
