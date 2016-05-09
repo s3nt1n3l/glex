@@ -180,8 +180,13 @@ int main(int argc, char ** argv) {
     	       input_Direction = LEFT;
     	     }else if(keyboard_state[SDL_SCANCODE_D]) {
     	       input_Direction = RIGHT;
+    	     }else if(keyboard_state[SDL_SCANCODE_LCTRL]) {
+    	       input_Direction = CROUCH;
+    	     }else if(keyboard_state[SDL_SCANCODE_SPACE]) {
+    	       input_Direction = JUMP;
     	     }else if(keyboard_state[SDL_SCANCODE_ESCAPE]) {
-    	       SDL_Quit();
+    	    	 std::cout<<"Exit Key ESC Pressed || Closing Program"<<std::endl;
+    	    	 SDL_Quit();
     	     }else{
     	       input_Direction = NONE;
     	     }

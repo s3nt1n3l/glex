@@ -10,5 +10,5 @@
  * 3. Scale -- load the correct shader to scale a simple asset.
  */
 enum ApplicationMode {TRANSFORM, ROTATE, SCALE};
-enum Input{ NONE, LEFT, RIGHT, UP, DOWN, ESCAPE};
+enum Input{ NONE, LEFT, RIGHT, UP, DOWN, JUMP, CROUCH, ESCAPE};
 #endif

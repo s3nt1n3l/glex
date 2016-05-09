@@ -27,7 +27,8 @@ class Camera{
     float DeltaTimeX;
     float DeltaTimeY;
 
-    float CameraSpeed;
+    float MouseCameraSpeed;
+    float KeyCameraSpeed;
 
 };
 

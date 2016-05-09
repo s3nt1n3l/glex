@@ -16,7 +16,8 @@ Camera::Camera() {
   DeltaTimeX = 1;
   DeltaTimeY = 1;
 
-  CameraSpeed = 0.20;
+  MouseCameraSpeed = 0.001;
+  KeyCameraSpeed = 0.30;
 
 }
 
@@ -30,7 +31,7 @@ Camera::Camera() {
 
 ///the following if statement will give the player x axis restriction, this is to insure that you can't turn the camera upside down
 
-  if((VerticalAngle + (0.01 * DeltaTimeY)) < 1 && (VerticalAngle + (0.01 * DeltaTimeY)) > -1) {
+  if((VerticalAngle + (MouseCameraSpeed * DeltaTimeY)) < 1 && (VerticalAngle + (0.01 * DeltaTimeY)) > -1) {
     VerticalAngle += 0.01 * DeltaTimeY;
   }
 
@@ -43,16 +44,20 @@ Camera::Camera() {
 ///update current position of the camera/player depending on the users input
 
       if( input_Direction == UP ) {
-          cameraPosition += glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),0,cos(VerticalAngle) * cos(HorizontalAngle))* CameraSpeed;
+          cameraPosition += glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),0,cos(VerticalAngle) * cos(HorizontalAngle))* KeyCameraSpeed;
       } else if( input_Direction == DOWN ) {
-          cameraPosition -= glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),0,cos(VerticalAngle) * cos(HorizontalAngle))* CameraSpeed;
+          cameraPosition -= glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),0,cos(VerticalAngle) * cos(HorizontalAngle))* KeyCameraSpeed;
       } else if( input_Direction == LEFT) {
-          cameraPosition -= Right * CameraSpeed;
+          cameraPosition -= Right * KeyCameraSpeed;
       } else if( input_Direction == RIGHT) {
-          cameraPosition += Right * CameraSpeed;
+          cameraPosition += Right * KeyCameraSpeed;
+      } else if(input_Direction == JUMP){
+    	  cameraPosition += Up * KeyCameraSpeed;
+      }	else if(input_Direction == CROUCH){
+    	  cameraPosition -= Up * KeyCameraSpeed;
   }
 
 ///return of view matrix
 
- return glm::lookAt(cameraPosition, cameraPosition + Direction,Up);
+ return glm::lookAt(cameraPosition, cameraPosition + Direction, Up);
 }
