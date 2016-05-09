@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "GameAssetManager.h"
+#include "GameAsset.h"
 #include "CubeAsset.h"
 
 /**
@@ -31,6 +32,7 @@ class GameWorld {
   void UpdateCameraPosition(Input, float MouseX, float MouseY);
 
  private:
+
   std::shared_ptr<GameAssetManager> asset_manager;
 };
 #endif // GAMEWORLD_H

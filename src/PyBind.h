@@ -1,5 +1,5 @@
 #include "common.h"
-#include "GameAssetManager.h"
+#include "Camera.h"
 #include <memory>
 
 #ifndef SRC_PYTHONBIND_H_
