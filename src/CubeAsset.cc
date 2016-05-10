@@ -14,14 +14,14 @@ CubeAsset::CubeAsset(GLfloat x, GLfloat y, GLfloat z): model_matrix(glm::mat4(1.
   };
 
 GLfloat g_color_buffer[] = {
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f,
-     0.350f, 0.450f, 0.550f
+     5.0f, 0.450f, 0.550f,
+     7.350f,  5.0f, 0.550f,
+     2.350f, 0.450f, 9.0f,
+     0.350f, 0.450f,  5.0f,
+     3.350f,  5.0f, 0.550f,
+      5.0f, 0.450f, 0.550f,
+     0.350f,  5.0f, 2.0f,
+      5.0f, 1.450f, 7.550f
 };
 	color_buffer_length = sizeof(g_color_buffer);
   element_buffer_length = 36;
