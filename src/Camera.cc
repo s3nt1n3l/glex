@@ -1,7 +1,9 @@
 #include "Camera.h"
 #include <glm/ext.hpp>
 
-/// this class will initialise the variables for the camera/player, it will also create a view matrix based on the position of the camera.
+/* This Class contains the initialisation of the camera and handles all the matrix creation for the view in game.
+ * In addition to calculating looking direction with the mouse it can traverse 3 dimentions using the W,A,S,D,LCTRL,SPACE keys.
+ */
 
 Camera::Camera() {
 
@@ -10,8 +12,8 @@ Camera::Camera() {
   Right = glm::vec3(0,0,0);
   Up = glm::vec3(0,0,0);
 
-  HorizontalAngle = 0;
-  VerticalAngle = 0;
+  HoriAngle = 0;
+  VertAngle = 0;
 
   DeltaTimeX = 1;
   DeltaTimeY = 1;
@@ -21,32 +23,32 @@ Camera::Camera() {
 
 }
 
-///Updates camera depending on the user input, will change the view matrix.
+///Changes the view matrix by taking the users input and reacting accordingly
 
     glm::mat4 Camera::UpdateCameraPosition( Input input_Direction, int MouseX, int MouseY) {
       DeltaTimeX = -MouseX;
       DeltaTimeY = -MouseY;
 
-      HorizontalAngle += 0.01 * DeltaTimeX;
+      HoriAngle += 0.01 * DeltaTimeX;
 
-///the following if statement will give the player x axis restriction, this is to insure that you can't turn the camera upside down
+///This 'if' will stop the player from flipping the camera
 
-  if((VerticalAngle + (MouseCameraSpeed * DeltaTimeY)) < 1 && (VerticalAngle + (0.01 * DeltaTimeY)) > -1) {
-    VerticalAngle += 0.01 * DeltaTimeY;
+  if((VertAngle + (MouseCameraSpeed * DeltaTimeY)) < 1 && (VertAngle + (0.01 * DeltaTimeY)) > -1) {
+    VertAngle += 0.01 * DeltaTimeY;
   }
 
-///calculate of directions of view
+///Calculations for point of view
 
-    Direction = glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),sin(VerticalAngle),cos(VerticalAngle) * cos(HorizontalAngle));
-    Right = glm::vec3(sin(HorizontalAngle - 3.14/2.0f),0,cos(HorizontalAngle - 3.14/2.0f));
+    Direction = glm::vec3(cos(VertAngle) * sin(HoriAngle),sin(VertAngle),cos(VertAngle) * cos(HoriAngle));
+    Right = glm::vec3(sin(HoriAngle - 3.14/2.0f),0,cos(HoriAngle - 3.14/2.0f));
     Up = glm::cross(Right, Direction);
 
-///update current position of the camera/player depending on the users input
+///Updates the current camera position based on the registered input detected
 
       if( input_Direction == UP ) {
-          cameraPosition += glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),0,cos(VerticalAngle) * cos(HorizontalAngle))* KeyCameraSpeed;
+          cameraPosition += glm::vec3(cos(VertAngle) * sin(HoriAngle),0,cos(VertAngle) * cos(HoriAngle))* KeyCameraSpeed;
       } else if( input_Direction == DOWN ) {
-          cameraPosition -= glm::vec3(cos(VerticalAngle) * sin(HorizontalAngle),0,cos(VerticalAngle) * cos(HorizontalAngle))* KeyCameraSpeed;
+          cameraPosition -= glm::vec3(cos(VertAngle) * sin(HoriAngle),0,cos(VertAngle) * cos(HoriAngle))* KeyCameraSpeed;
       } else if( input_Direction == LEFT) {
           cameraPosition -= Right * KeyCameraSpeed;
       } else if( input_Direction == RIGHT) {

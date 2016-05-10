@@ -1,0 +1,45 @@
+\hypertarget{classGameWorld}{}\section{Game\+World Class Reference}
+\label{classGameWorld}\index{Game\+World@{Game\+World}}
+
+
+{\ttfamily \#include $<$Game\+World.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGameWorld_a17a84e57a80600961088afc753036f89}{Game\+World} (Application\+Mode)
+\item 
+void \hyperlink{classGameWorld_a275418607d8286979b276f165ad5876b}{Draw} ()
+\item 
+\hypertarget{classGameWorld_a5d0564b2c52dced845e3e008f840583e}{}void {\bfseries Update\+Camera\+Position} (Input, float Mouse\+X, float Mouse\+Y)\label{classGameWorld_a5d0564b2c52dced845e3e008f840583e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classGameWorld}{Game\+World} allows us to separate the management of the game world from the nuts and bolts of game loop initialisation. The \hyperlink{classGameWorld}{Game\+World} currently has a very simplified scene graph consisiting of a single \hyperlink{classGameAssetManager}{Game\+Asset\+Manager}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classGameWorld_a17a84e57a80600961088afc753036f89}{}\index{Game\+World@{Game\+World}!Game\+World@{Game\+World}}
+\index{Game\+World@{Game\+World}!Game\+World@{Game\+World}}
+\subsubsection[{Game\+World(\+Application\+Mode)}]{\setlength{\rightskip}{0pt plus 5cm}Game\+World\+::\+Game\+World (
+\begin{DoxyParamCaption}
+\item[{Application\+Mode}]{mode}
+\end{DoxyParamCaption}
+)}\label{classGameWorld_a17a84e57a80600961088afc753036f89}
+We thread the Application\+Mode through the \hyperlink{classGameWorld}{Game\+World} ss we want to read it in from the user. Threading the state through the various function calls is preferable (in this case) to having some kind of global state. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classGameWorld_a275418607d8286979b276f165ad5876b}{}\index{Game\+World@{Game\+World}!Draw@{Draw}}
+\index{Draw@{Draw}!Game\+World@{Game\+World}}
+\subsubsection[{Draw()}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+World\+::\+Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGameWorld_a275418607d8286979b276f165ad5876b}
+Calling \hyperlink{classGameWorld_a275418607d8286979b276f165ad5876b}{Draw()} will draw the entire world. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+World.\+h\item 
+Game\+World.\+cc\end{DoxyCompactItemize}

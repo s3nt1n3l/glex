@@ -4,7 +4,9 @@
 #include <glm/ext.hpp>
 #include "common.h"
 
-///definition of the Camera class, defines many of the variables used to calculate camera position
+/*
+ * This defines the variables used in the camera class, it also interfaces with the other classes needed.
+ */
 
 class Camera{
   public:
@@ -12,17 +14,13 @@ class Camera{
     glm::mat4 UpdateCameraPosition( Input input_Direction, int MouseX, int MouseY);
   private:
 
-    float CameraPositionX;
-    float CameraPositionY;
-    float CameraPositionZ;
-
     glm::vec3 cameraPosition;
     glm::vec3 Direction;
     glm::vec3 Right;
     glm::vec3 Up;
 
-    float HorizontalAngle;
-    float VerticalAngle;
+    float HoriAngle;
+    float VertAngle;
 
     float DeltaTimeX;
     float DeltaTimeY;
