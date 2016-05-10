@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (shaderexamples) 0.1
-# Libtool was configured on host mowa202L-c4.university.brighton.ac.uk:
+# Libtool was configured on host mowa202L-c3.university.brighton.ac.uk:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -93,7 +93,7 @@ FGREP="/usr/bin/grep -F"
 NM="/usr/bin/nm -B"
 
 # Whether we need soft or hard links.
-LN_S="ln -s"
+LN_S="ln"
 
 # What is the maximum length of a command?
 max_cmd_len=1572864
